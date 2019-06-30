@@ -1,6 +1,7 @@
 const video = document.getElementById("myvideo");
 const handimg = document.getElementById("handimage");
 const canvas = document.getElementById("canvas");
+const canvas2 = document.getElementById("canvas2");
 const context = canvas.getContext("2d");
 let trackButton = document.getElementById("trackbutton");
 let nextImageButton = document.getElementById("nextimagebutton");
@@ -14,7 +15,7 @@ let model = null;
 // video.height = 400
 
 const modelParams = {
-    flipHorizontal: true,   // flip e.g for video  
+    flipHorizontal: true,   // flip e.g for video
     maxNumBoxes: 20,        // maximum number of boxes to detect
     iouThreshold: 0.5,      // ioU threshold for non-max suppression
     scoreThreshold: 0.6,    // confidence threshold for predictions.
@@ -63,11 +64,25 @@ function nextImage() {
     runDetectionImage(handimg)
 }
 
-
+//
+predictmapper = {
+  0: "Hand",
+  1: "Foot"
+}
+//
 
 function runDetection() {
     model.detect(video).then(predictions => {
         console.log("Predictions: ", predictions);
+//
+        var ctx = canvas2.getContext('2d')
+        ctx.font = '30px Arial'
+        if (predictions[0] === undefined) {
+          ctx.fillText('',10,50)
+        } else {
+          ctx.fillText(predictmapper[predictions[0]['class']],10,50)
+        }
+//
         model.renderPredictions(predictions, canvas, context, video);
         if (isVideo) {
             requestAnimationFrame(runDetection);
