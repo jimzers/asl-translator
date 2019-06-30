@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 // import ReactWebRTC from './components/ReactWebRTC'
+/*
 function Chicken() {
     return(
         <div>
@@ -33,11 +34,12 @@ function Chicken() {
 
     );
 }
+*/
 
 function App() {
   return (
     <div className="App">
-      <Chicken/>
+        <h1>yes</h1>
     </div>
   );
 }
